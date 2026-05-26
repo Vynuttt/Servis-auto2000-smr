@@ -1,0 +1,154 @@
+/* 1. (WAJIB) Impor tema dasar Filament */
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+/* 2. (WAJIB) Impor components & utilities, TAPI BUKAN BASE */
+/* @tailwind base; <-- INI YANG DIHAPUS UNTUK MEMPERBAIKI LAYOUT */
+    /* @tailwind components; */
+/* @tailwind utilities; */
+
+/* ===========================
+    Tema Dark Mode Auto2000
+   =========================== */
+@layer base {
+    
+    /* (PERBAIKAN) Menggunakan selector html.dark yang lebih kuat */
+    html.dark {
+        --p-950: 3 7 18;  /* gray-950 (Hitam pekat untuk BG utama) */
+        --p-900: 17 24 39; /* gray-900 (BG Kartu/Widget) */
+        --p-800: 31 41 55; /* gray-800 (Borders) */
+        --p-700: 55 65 81; /* gray-700 (Borders lebih terang) */
+
+        /* Override warna utama Filament */
+        --fi-body-bg: rgb(var(--p-950));
+        --fi-panel-bg: rgb(var(--p-900));
+        --fi-sidebar-bg: rgb(var(--p-950));  /* <-- Ini akan bekerja sekarang */
+        --fi-header-bg: rgb(var(--p-900));   /* <-- Ini akan bekerja sekarang */
+        
+        /* Override warna abu-abu (untuk teks, dll) */
+        --fi-color-gray-50: 249 250 251;
+        --fi-color-gray-100: 243 244 246;
+        --fi-color-gray-200: 229 231 235;
+        --fi-color-gray-300: 209 213 219;
+        --fi-color-gray-400: 156 163 175;
+        --fi-color-gray-500: 107 114 128;
+        --fi-color-gray-600: 75 85 99;
+        --fi-color-gray-700: rgb(var(--p-700));
+        --fi-color-gray-800: rgb(var(--p-800));
+        --fi-color-gray-900: rgb(var(--p-900));
+        --fi-color-gray-950: rgb(var(--p-950));
+    }
+
+    /* Perbaikan 'select' dari file Anda sebelumnya */
+    select,
+    .filament select,
+    .fi-input select,
+    .fi-fo-select select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: none !important;
+        background-repeat: no-repeat !important;
+        background-position: right .5rem center !important;
+        padding-right: 2.25rem;
+    }
+}
+
+/* ===========================
+   Monitoring Board Components
+   =========================== */
+@layer components {
+    .btn {
+        @apply inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium
+               transition-colors border border-transparent
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500
+               focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+    }
+
+    .btn-primary {
+        @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-700;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-100 text-gray-800 hover:bg-gray-200 active:bg-gray-300
+               dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600;
+    }
+
+    .btn-ghost {
+        @apply bg-transparent text-gray-700 hover:bg-gray-100
+               dark:text-gray-300 dark:hover:bg-gray-800;
+    }
+
+    .btn-link {
+        @apply text-red-600 hover:underline px-0 py-0 border-0;
+    }
+
+    .mb-root > * + * {
+        @apply mt-6;
+    }
+
+    .mb-card {
+        @apply rounded-xl border border-gray-200 dark:border-gray-700
+               bg-white dark:bg-gray-800 shadow-sm;
+    }
+
+    .mb-kpi-title {
+        @apply text-sm text-gray-500 dark:text-gray-400;
+    }
+
+    .mb-kpi-value {
+        @apply text-2xl font-semibold mt-1;
+    }
+
+    .mb-pill {
+        @apply inline-flex items-center gap-2 text-xs px-2.5 py-1 rounded-full
+               border border-gray-200 dark:border-gray-700;
+    }
+
+    .mb-time-header {
+        @apply bg-gray-50 dark:bg-gray-900 text-xs
+               border-b border-gray-200 dark:border-gray-700;
+    }
+
+    .mb-grid {
+        display: grid;
+        grid-template-columns: repeat(var(--ticks, 1), minmax(0, 1fr));
+    }
+
+    .mb-grid-col {
+        @apply border-r border-gray-100 dark:border-gray-800;
+    }
+
+    .mb-now-line {
+        @apply absolute top-0 bottom-0 w-0.5 bg-red-600 z-20;
+    }
+
+    .mb-wo {
+        @apply absolute rounded-lg shadow-md hover:shadow-lg transition-shadow
+               text-white text-xs p-2 flex flex-col gap-1 cursor-pointer z-20;
+    }
+
+    .mb-scroll::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .mb-scroll::-webkit-scrollbar-thumb {
+        background: #9ca3af33;
+        border-radius: 9999px;
+    }
+
+    .mb-scroll:hover::-webkit-scrollbar-thumb {
+        background: #9ca3af66;
+    }
+
+    .mb-chip {
+        @apply text-[9px] px-1 rounded text-white;
+    }
+
+    .mb-chip-late {
+        @apply bg-red-600;
+    }
+
+    .mb-chip-soon {
+        @apply bg-amber-500;
+    }
+}
